@@ -41,20 +41,9 @@ public class QuizService {
     }
     public ResponseEntity<String> getQuizResult(int id, List<QuizResponse> quizResponse)
     {
-        Quiz quiz =quizDao.findById(id).get();
-        // List<Question> questions = quiz.getQuestions();
-        int right =0;
-        // int i=0;
-        // for(QuizResponse response: quizResponse)
-        // {
-        //     //here i is using for referring index of quiz question not to id of question...
-        //     if(response.getResponse().equals(questions.get(i).getRightAnswer()))
-        //     {
-        //         right ++;
-        //     }  
-        //     i++;
-        // }
-        return new ResponseEntity<>("The Right Answers - "+right,HttpStatus.OK);
+       
+        ResponseEntity<Integer> score = quizInterface.getScore(quizResponse);
+        return new ResponseEntity<>("The Right Answers - "+score.getBody(),HttpStatus.OK);
     }
     
 }
