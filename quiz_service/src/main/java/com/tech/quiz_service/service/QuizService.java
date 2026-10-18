@@ -34,15 +34,10 @@ public class QuizService {
     }
     public ResponseEntity<List<QuestionWrapper>> getQuiz(int id)
     {
-        //Optional<Quiz> quiz = quizDao.findById(id);
-        //List<Question> questionFromDb = quiz.get().getQuestions();
-        List<QuestionWrapper> questionsForUsers = new ArrayList<>();
-        // for(Question q: questionFromDb)
-        // {
-        //     QuestionWrapper qw =new QuestionWrapper(q.getId(),q.getQuestionTitle(),q.getOption1(),q.getOption2(),q.getOption3(),q.getOption4());
-        //     questionsForUsers.add(qw);
-        // }
-        return new ResponseEntity<>(questionsForUsers,HttpStatus.OK);
+        Quiz quiz = quizDao.findById(id).get();
+        List<Integer> questionFromDb = quiz.getQuestions();
+        ResponseEntity<List<QuestionWrapper>> questionsForUsers = quizInterface.getQuestionsFromIds(questionFromDb);
+        return questionsForUsers; 
     }
     public ResponseEntity<String> getQuizResult(int id, List<QuizResponse> quizResponse)
     {

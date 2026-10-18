@@ -15,17 +15,17 @@ import com.tech.quiz_service.model.QuizResponse;
 @FeignClient ("QUESTION-SERVICE")
 public interface quizInterface {
     //Generate
-    @GetMapping ("generate")
+    @GetMapping ("questions/generate")
     public ResponseEntity<List<Integer>> getQuestionForQuiz(@RequestParam String categoryName,@RequestParam int numberOfQuestions);
     
 
     //GetQuestion
-    @PostMapping ("getQuestions")
+    @PostMapping ("questions/getQuestions")
     public ResponseEntity<List<QuestionWrapper>> getQuestionsFromIds(@RequestBody List<Integer> questionIds);
    
 
     //GetScore
-    @PostMapping ("GetScore")
+    @PostMapping ("questions/GetScore")
     public ResponseEntity<Integer> getScore(@RequestBody List<QuizResponse> responses);
    
     
